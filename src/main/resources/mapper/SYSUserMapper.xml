@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mrathena.spring.boot.start.dao.SYSUserMapper">
-	<resultMap id="BaseResultMap" type="com.mrathena.spring.boot.start.entity.SYSUser">
+<mapper namespace="com.mrathena.spring.boot.dao.SYSUserMapper">
+	<resultMap id="BaseResultMap" type="com.mrathena.spring.boot.entity.SYSUser">
 		<id column="id" jdbcType="BIGINT" property="id" />
 		<result column="username" jdbcType="VARCHAR" property="username" />
 		<result column="password" jdbcType="VARCHAR" property="password" />
-		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
+		<result column="salt" jdbcType="VARCHAR" property="salt" />
+		<result column="roleIds" jdbcType="VARCHAR" property="roleIds" />
+		<result column="includeIds" jdbcType="VARCHAR" property="includeIds" />
+		<result column="excludeIds" jdbcType="VARCHAR" property="excludeIds" />
+		<result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="available" jdbcType="BIT" property="available" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, username, password, nickname
+		id, username, password, salt, roleIds, includeIds, excludeIds, createTime, available
 	</sql>
-	<insert id="insert" parameterType="com.mrathena.spring.boot.start.entity.SYSUser">
+	<insert id="insert" parameterType="com.mrathena.spring.boot.entity.SYSUser">
 		insert into sys_user (id, username, password, 
-			nickname)
+			salt, roleIds, includeIds, 
+			excludeIds, createTime, available
+			)
 		values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-			#{nickname,jdbcType=VARCHAR})
+			#{salt,jdbcType=VARCHAR}, #{roleIds,jdbcType=VARCHAR}, #{includeIds,jdbcType=VARCHAR}, 
+			#{excludeIds,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{available,jdbcType=BIT}
+			)
 	</insert>
-	<insert id="insertSelective" parameterType="com.mrathena.spring.boot.start.entity.SYSUser">
+	<insert id="insertSelective" parameterType="com.mrathena.spring.boot.entity.SYSUser">
 		insert into sys_user
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -28,8 +37,23 @@
 			<if test="password != null">
 				password,
 			</if>
-			<if test="nickname != null">
-				nickname,
+			<if test="salt != null">
+				salt,
+			</if>
+			<if test="roleIds != null">
+				roleIds,
+			</if>
+			<if test="includeIds != null">
+				includeIds,
+			</if>
+			<if test="excludeIds != null">
+				excludeIds,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="available != null">
+				available,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -42,19 +66,39 @@
 			<if test="password != null">
 				#{password,jdbcType=VARCHAR},
 			</if>
-			<if test="nickname != null">
-				#{nickname,jdbcType=VARCHAR},
+			<if test="salt != null">
+				#{salt,jdbcType=VARCHAR},
+			</if>
+			<if test="roleIds != null">
+				#{roleIds,jdbcType=VARCHAR},
+			</if>
+			<if test="includeIds != null">
+				#{includeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="excludeIds != null">
+				#{excludeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="available != null">
+				#{available,jdbcType=BIT},
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKey" parameterType="com.mrathena.spring.boot.start.entity.SYSUser">
+	<update id="updateByPrimaryKey" parameterType="com.mrathena.spring.boot.entity.SYSUser">
 		update sys_user
 		set username = #{username,jdbcType=VARCHAR},
 			password = #{password,jdbcType=VARCHAR},
-			nickname = #{nickname,jdbcType=VARCHAR}
+			salt = #{salt,jdbcType=VARCHAR},
+			roleIds = #{roleIds,jdbcType=VARCHAR},
+			includeIds = #{includeIds,jdbcType=VARCHAR},
+			excludeIds = #{excludeIds,jdbcType=VARCHAR},
+			createTime = #{createTime,jdbcType=TIMESTAMP},
+			available = #{available,jdbcType=BIT}
 		where id = #{id,jdbcType=BIGINT}
 	</update>
-	<update id="updateByPrimaryKeySelective" parameterType="com.mrathena.spring.boot.start.entity.SYSUser">
+	<update id="updateByPrimaryKeySelective" parameterType="com.mrathena.spring.boot.entity.SYSUser">
 		update sys_user
 		<set>
 			<if test="username != null">
@@ -63,8 +107,23 @@
 			<if test="password != null">
 				password = #{password,jdbcType=VARCHAR},
 			</if>
-			<if test="nickname != null">
-				nickname = #{nickname,jdbcType=VARCHAR},
+			<if test="salt != null">
+				salt = #{salt,jdbcType=VARCHAR},
+			</if>
+			<if test="roleIds != null">
+				roleIds = #{roleIds,jdbcType=VARCHAR},
+			</if>
+			<if test="includeIds != null">
+				includeIds = #{includeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="excludeIds != null">
+				excludeIds = #{excludeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="available != null">
+				available = #{available,jdbcType=BIT},
 			</if>
 		</set>
 		where id = #{id,jdbcType=BIGINT}
@@ -79,7 +138,63 @@
 		from sys_user
 		where id = #{id,jdbcType=BIGINT}
 	</select>
-	<select id="selectAll" resultType="com.mrathena.spring.boot.start.entity.SYSUser">
-		select * from sys_user order by id
+	<select id="selectByUsername" parameterType="java.lang.String" resultType="com.mrathena.spring.boot.entity.SYSUser">
+		select * from sys_user where username = #{username}
+	</select>
+	<select id="selectAll" parameterType="java.lang.String" resultType="com.mrathena.spring.boot.entity.SYSUser">
+		select * from sys_user order by createTime
+	</select>
+	<update id="enableByIds" parameterType="java.util.Map">
+		update sys_user set available = 1 where id in
+		<foreach collection="ids" item="id" index="index" open="(" separator="," close=")">#{id}</foreach>
+	</update>
+	<update id="disableByIds" parameterType="java.util.Map">
+		update sys_user set available = 0 where id in
+		<foreach collection="ids" item="id" index="index" open="(" separator="," close=")">#{id}</foreach>
+	</update>
+	<update id="authorizeByIds" parameterType="java.util.Map">
+		update sys_user set roleIds = #{roleIds}, includeIds = #{includeIds}, excludeIds = #{excludeIds} where id in
+		<foreach collection="ids" item="id" index="index" open="(" separator="," close=")">#{id}</foreach>
+	</update>
+	<delete id="deleteByIds" parameterType="java.util.Map">
+		delete from sys_user where id in
+		<foreach collection="ids" item="id" index="index" open="(" separator="," close=")">#{id}</foreach>
+	</delete>
+	<select id="selectRolesByUsername" parameterType="java.lang.String" resultType="java.util.Set">
+		select role.name from sys_user user
+		inner join sys_role role on find_in_set(role.id, user.roleIds) != 0
+		where user.username = #{username}
+	</select>
+	<select id="selectPermissionsByUsername" parameterType="java.lang.String" resultType="java.util.Set">
+		select DISTINCT * from (
+			select resource.permission from sys_user user
+			inner join sys_role role on find_in_set(role.id, user.roleIds) != 0 and role.available = 1
+			inner join sys_resource resource on find_in_set(resource.id, role.resourceIds) != 0 and resource.available = 1
+			where user.username = #{username}
+			UNION ALL
+			select resource.permission from sys_user user
+			inner join sys_resource resource on find_in_set(resource.id, user.includeIds) != 0 and resource.available = 1
+			where user.username = #{username}
+		) result where result.permission not in (
+			select resource.permission from sys_user user
+			inner join sys_resource resource on find_in_set(resource.id, user.excludeIds) != 0 and resource.available = 1
+			where user.username = #{username}
+		) order by parentId, priority
+	</select>
+	<select id="selectResourcesByUsername" parameterType="java.lang.String" resultType="com.mrathena.spring.boot.entity.SYSResource">
+		select DISTINCT * from (
+			select resource.* from sys_user user
+			inner join sys_role role on find_in_set(role.id, user.roleIds) != 0 and role.available = 1
+			inner join sys_resource resource on find_in_set(resource.id, role.resourceIds) != 0 and resource.available = 1
+			where user.username = #{username}
+			UNION ALL
+			select resource.* from sys_user user
+			inner join sys_resource resource on find_in_set(resource.id, user.includeIds) != 0 and resource.available = 1
+			where user.username = #{username}
+		) result where result.id not in (
+			select resource.id from sys_user user
+			inner join sys_resource resource on find_in_set(resource.id, user.excludeIds) != 0 and resource.available = 1
+			where user.username = #{username}
+		) order by parentId, priority
 	</select>
 </mapper>

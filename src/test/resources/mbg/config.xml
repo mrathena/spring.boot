@@ -47,15 +47,15 @@
 			targetProject="${target.java.path}" type="XMLMAPPER">
 		</javaClientGenerator>
 
+		<table tableName="sys_resource" domainObjectName="SYSResource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="sys_role" domainObjectName="SYSRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+			<property name="useActualColumnNames" value="true"/>
+		</table>
 		<table tableName="sys_user" domainObjectName="SYSUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
 			<property name="useActualColumnNames" value="true"/>
 		</table>
-		<!-- <table tableName="sys_role" domainObjectName="SYSRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
-			<property name="useActualColumnNames" value="true"/>
-		</table> -->
-		<!-- <table tableName="sys_user" domainObjectName="SYSUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
-			<property name="useActualColumnNames" value="true"/>
-		</table> -->
 
 		<!-- 
 		<table tableName="MERCHANT_BUSINESS_AUDIT" alias="mb" schema="jsh"

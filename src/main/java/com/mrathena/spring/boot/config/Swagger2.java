@@ -25,7 +25,7 @@ public class Swagger2 {
 		ApiInfo info = new ApiInfoBuilder()
             .title("This is the Title")
             .description("This is the Description")
-            .termsOfServiceUrl("http://spring.boot.mrathena.top/")
+            .termsOfServiceUrl("http://mrathena.top/spring.boot")
             .version("1.0.0")
             .build();
 		return new Docket(DocumentationType.SWAGGER_2)
