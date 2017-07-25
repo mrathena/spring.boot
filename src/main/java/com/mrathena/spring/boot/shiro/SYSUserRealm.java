@@ -10,16 +10,15 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mrathena.spring.boot.entity.SYSUser;
 import com.mrathena.spring.boot.service.SYSUserService;
+import com.mrathena.spring.boot.tool.SpringBootKit;
 
 public class SYSUserRealm extends AuthorizingRealm {
 
-	@Autowired
-	private SYSUserService userService;
-	
+	private SYSUserService userService = SpringBootKit.getBean(SYSUserService.class);
+
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// 授权
