@@ -36,7 +36,7 @@ public class SecurityController {
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login() {
-		return "login";
+		return "login.jsp";
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
@@ -51,7 +51,7 @@ public class SecurityController {
 		} catch (UnknownAccountException e) {
 			// 账号不存在, SYSUserRealm.java
 			model.addAttribute("error", "账号与密码组合不正确");
-			return "login";
+			return "login.jsp";
 		} catch (IncorrectCredentialsException e) {
 			// 密码不正确. SYSUserRealm.java
 			String message = "账号与密码组合不正确";
@@ -65,34 +65,34 @@ public class SecurityController {
 				}
 			}
 			model.addAttribute("error", message);
-			return "login";
+			return "login.jsp";
 		} catch (ExcessiveAttemptsException e) {
 			// 登录失败次数过多, RetryLimitHashedCredentialsMatcher.java
 			model.addAttribute("error", "由于您累计输入错误的账号与密码组合已达 5 次, 系统已锁定您的账号, 请于60分钟后再尝试登录. <br />注意:锁定期间您的每一次登录尝试都会将锁定等待时间重置为60分钟.");
-			return "login";
+			return "login.jsp";
 		} catch (LockedAccountException e) {
 			// 账号已被禁用, SYSUserRealm.java
 			model.addAttribute("error", "账号已被禁用, 不允许登录");
-			return "login";
+			return "login.jsp";
 		} catch (ExpiredCredentialsException e) {
 			model.addAttribute("error", "账号已过期, 不允许登录");
-			return "login";
+			return "login.jsp";
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			model.addAttribute("error", "系统异常");
-			return "login";
+			return "login.jsp";
 		}
 		return "redirect:index";
 	}
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String artifect() {
-		return "layout/artifact";
+		return "layout/artifact.jsp";
 	}
 	
 	@RequestMapping(value = "unauthorize", method = RequestMethod.GET)
 	public String unauthorize() {
-		return "unauthorize";
+		return "unauthorize.jsp";
 	}
 	
 	@RequestMapping(value = "logout", method = RequestMethod.GET)

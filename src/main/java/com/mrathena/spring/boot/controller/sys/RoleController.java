@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,7 +26,7 @@ public class RoleController {
 	private SYSRoleService roleService;
 	
 	@ResponseBody
-	@RequestMapping("{id}")
+	@RequestMapping(value = "{id}", method = RequestMethod.POST)
 	public Object getRole(@PathVariable Long id) {
 		Json json = null;
 		try {
@@ -39,7 +40,7 @@ public class RoleController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("all")
+	@RequestMapping(value = "all", method = RequestMethod.POST)
 	public Object getAllRoles() {
 		Json json = null;
 		try {
@@ -53,7 +54,7 @@ public class RoleController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("avaliable")
+	@RequestMapping(value = "avaliable", method = RequestMethod.POST)
 	public Object getAllAvaliableRoles() {
 		Json json = null;
 		try {
@@ -67,7 +68,7 @@ public class RoleController {
 	}
 
 	@ResponseBody
-	@RequestMapping("insert")
+	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public Object addRole(SYSRole role) {
 		Json json = null;
 		try {
@@ -81,7 +82,7 @@ public class RoleController {
 	}
 
 	@ResponseBody
-	@RequestMapping("disable")
+	@RequestMapping(value = "disable", method = RequestMethod.POST)
 	public Object lockRole(@RequestParam("roleIds[]") Long... roleIds) {
 		Json json = null;
 		try {
@@ -95,7 +96,7 @@ public class RoleController {
 	}
 
 	@ResponseBody
-	@RequestMapping("enable")
+	@RequestMapping(value = "enable", method = RequestMethod.POST)
 	public Object unlockRole(@RequestParam("roleIds[]") Long... roleIds) {
 		Json json = null;
 		try {
@@ -109,7 +110,7 @@ public class RoleController {
 	}
 
 	@ResponseBody
-	@RequestMapping("delete")
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public Object deleteRole(@RequestParam("roleIds[]") Long... roleIds) {
 		Json json = null;
 		try {
@@ -123,7 +124,7 @@ public class RoleController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("update")
+	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public Object updateRole(SYSRole role) {
 		Json json = null;
 		try {

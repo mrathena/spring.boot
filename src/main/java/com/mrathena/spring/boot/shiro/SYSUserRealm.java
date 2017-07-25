@@ -19,7 +19,7 @@ public class SYSUserRealm extends AuthorizingRealm {
 
 	@Autowired
 	private SYSUserService userService;
-
+	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// 授权

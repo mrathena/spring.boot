@@ -37,8 +37,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		<!-- 本次使用JSP
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
@@ -51,7 +50,6 @@
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>jstl</artifactId>
 		</dependency>
-		<!--用于编译jsp-->
 		<dependency>
 		    <groupId>org.apache.tomcat.embed</groupId>
 		    <artifactId>tomcat-embed-jasper</artifactId>
@@ -114,28 +112,6 @@
 			<artifactId>shiro-spring</artifactId>
 			<version>1.4.0</version>
 		</dependency>
-		<!-- shiro和thymeleaf整合 -->
-		<!-- 1.添加依赖  -->
-		<dependency>
-			<groupId>com.github.theborakompanioni</groupId>
-			<artifactId>thymeleaf-extras-shiro</artifactId>
-			<version>2.0.0</version>
-		</dependency>
-		<!-- 2.在shiro的configuration中配置
-		@Bean
-	    public ShiroDialect shiroDialect() {
-	        return new ShiroDialect();
-	    }
-		 -->
-		<!-- 3.在html中加入xmlns
-		<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
-		xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-		 -->
-		<!-- 4.使用
-		<span shiro:authenticated="true" >
-			<span>欢迎您：<span th:text="${userInfo.realName}"></span></span>
-		</span>
-		 -->
         
    		<dependency>
 			<groupId>io.springfox</groupId>

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +25,7 @@ public class ResourceController {
 	private SYSResourceService resourceService;
 	
 	@ResponseBody
-	@RequestMapping("all")
+	@RequestMapping(value = "all", method = RequestMethod.POST)
 	public Object getAllResources() {
 		Json json = null;
 		try {
@@ -38,7 +39,7 @@ public class ResourceController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("avaliable")
+	@RequestMapping(value = "avaliable", method = RequestMethod.POST)
 	public Object getAllAvaliableResources() {
 		Json json = null;
 		try {
@@ -52,7 +53,7 @@ public class ResourceController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("insert")
+	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public Object insert(SYSResource resource) {
 		Json json = null;
 		try {
@@ -66,7 +67,7 @@ public class ResourceController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("update")
+	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public Object update(SYSResource resource) {
 		Json json = null;
 		try {
@@ -80,7 +81,7 @@ public class ResourceController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("enable")
+	@RequestMapping(value = "enable", method = RequestMethod.POST)
 	public Object enable(@RequestParam("resourceIds[]") Long... resourceIds) {
 		Json json = null;
 		try {
@@ -94,7 +95,7 @@ public class ResourceController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("disable")
+	@RequestMapping(value = "disable", method = RequestMethod.POST)
 	public Object disable(@RequestParam("resourceIds[]") Long... resourceIds) {
 		Json json = null;
 		try {
@@ -108,7 +109,7 @@ public class ResourceController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("delete")
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public Object delete(@RequestParam("resourceIds[]") Long... resourceIds) {
 		Json json = null;
 		try {

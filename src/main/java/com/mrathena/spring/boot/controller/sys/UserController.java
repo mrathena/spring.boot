@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,7 +33,7 @@ public class UserController {
 	private CacheManager cacheManager;
 
 	@ResponseBody
-	@RequestMapping("{id}")
+	@RequestMapping(value = "{id}", method = RequestMethod.POST)
 	public Object getUser(@PathVariable Long id) {
 		Json json = null;
 		try {
@@ -46,7 +47,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("all")
+	@RequestMapping(value = "all", method = RequestMethod.POST)
 	public Object getAllUsers() {
 		Json json = null;
 		try {
@@ -60,7 +61,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("resource")
+	@RequestMapping(value = "resource", method = RequestMethod.POST)
 	public Object getResourcesByUsername() {
 		Json json = null;
 		try {
@@ -75,7 +76,7 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@RequestMapping("insert")
+	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public Object addUser(SYSUser user) {
 		Json json = null;
 		try {
@@ -89,7 +90,7 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@RequestMapping("disable")
+	@RequestMapping(value = "disable", method = RequestMethod.POST)
 	public Object lockUser(@RequestParam("userIds[]") Long... userIds) {
 		Json json = null;
 		try {
@@ -103,7 +104,7 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@RequestMapping("enable")
+	@RequestMapping(value = "enable", method = RequestMethod.POST)
 	public Object unlockUser(@RequestParam("userIds[]") Long... userIds) {
 		Json json = null;
 		try {
@@ -117,7 +118,7 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@RequestMapping("resetPassword")
+	@RequestMapping(value = "resetPassword", method = RequestMethod.POST)
 	public Object resetPassword(SYSUser user) {
 		Json json = null;
 		try {
@@ -131,7 +132,7 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@RequestMapping("delete")
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public Object deleteUser(@RequestParam("userIds[]") Long... userIds) {
 		Json json = null;
 		try {
@@ -145,7 +146,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("authorize")
+	@RequestMapping(value = "authorize", method = RequestMethod.POST)
 	public Object authorizeUsers(@RequestParam("userIds[]") Long[] userIds, String roleIds, String includeIds, String excludeIds) {
 		Json json = null;
 		try {
@@ -159,7 +160,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("unlock")
+	@RequestMapping(value = "unlock", method = RequestMethod.POST)
 	public Object unlock(@RequestParam("usernames[]") String[] usernames) {
 		Cache<String, AtomicInteger> passwordRetryCache = cacheManager.getCache("passwordRetryCache");
 		for (String username : usernames) {

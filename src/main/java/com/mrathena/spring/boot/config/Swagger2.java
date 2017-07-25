@@ -31,7 +31,7 @@ public class Swagger2 {
 		return new Docket(DocumentationType.SWAGGER_2)
 			.apiInfo(info)
 			.select()
-			.apis(RequestHandlerSelectors.basePackage("com.mrathena.spring.boot.start.controller"))
+			.apis(RequestHandlerSelectors.basePackage("com.mrathena.spring.boot.controller"))
 			.paths(PathSelectors.any())
 			.build();
 	}

@@ -1,33 +1,24 @@
 package com.mrathena.spring.boot.tool;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 
 import com.mrathena.spring.boot.constant.Constants;
 import com.mrathena.spring.boot.entity.SYSUser;
 
 public class SessionKit {
 
-	public static HttpServletRequest getRequest() {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		return request;
-	}
-
-	public static HttpSession getSession() {
-		HttpServletRequest request = getRequest();
-		return request.getSession();
+	public static Session getSession() {
+		return SecurityUtils.getSubject().getSession();
 	}
 
 	public static void setSessionEntity(String key, Object entity) {
-		HttpSession session = getSession();
+		Session session = getSession();
 		session.setAttribute(key, entity);
 	}
 
 	public static Object getSessionEntity(String key) {
-		HttpSession session = getSession();
+		Session session = getSession();
 		return session.getAttribute(key);
 	}
 	
