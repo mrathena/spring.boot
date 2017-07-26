@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mrathena.spring.boot.entity.SYSRole;
 import com.mrathena.spring.boot.service.SYSRoleService;
-import com.mrathena.toolkit.data.Json;
+import com.mrathena.toolkit.Json;
 
 @Controller
 @RequestMapping("role")

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mrathena.spring.boot.entity.SYSResource;
 import com.mrathena.spring.boot.service.SYSResourceService;
-import com.mrathena.toolkit.data.Json;
+import com.mrathena.toolkit.Json;
 
 @Controller
 @RequestMapping("resource")
