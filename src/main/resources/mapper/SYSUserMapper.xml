@@ -15,7 +15,7 @@
 	<sql id="Base_Column_List">
 		id, username, password, salt, roleIds, includeIds, excludeIds, createTime, available
 	</sql>
-	<insert id="insert" parameterType="com.mrathena.spring.boot.entity.SYSUser">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.mrathena.spring.boot.entity.SYSUser">
 		insert into sys_user (id, username, password, 
 			salt, roleIds, includeIds, 
 			excludeIds, createTime, available
@@ -25,7 +25,7 @@
 			#{excludeIds,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{available,jdbcType=BIT}
 			)
 	</insert>
-	<insert id="insertSelective" parameterType="com.mrathena.spring.boot.entity.SYSUser">
+	<insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.mrathena.spring.boot.entity.SYSUser">
 		insert into sys_user
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
