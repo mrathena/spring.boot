@@ -163,7 +163,7 @@ $(document).ready(function() {
 		$.fn.zTree.getZTreeObj(id).expandAll(false);
 	});
 	// 初始化tree数据
-	$.getJson("role/avaliable", false, function(response) {
+	$.postJson("role/avaliable", null, false, function(response) {
 		if (response.status == 1) {
 			$.fn.zTree.init($("#roleTree"), zSetting, response.data.roles).expandAll(true);
 		} else if (response.status == 0) {
@@ -174,7 +174,7 @@ $(document).ready(function() {
 	}, function() {
 		$.msg.error("请稍后重试或联系系统管理员解决", "系统异常");
 	});
-	$.getJson("resource/avaliable", false, function(response) {
+	$.postJson("resource/avaliable", null, false, function(response) {
 		if (response.status == 1) {
 			$.fn.zTree.init($("#includeTree"), zSetting, response.data.resources).expandAll(true);
 			$.fn.zTree.init($("#excludeTree"), zSetting, response.data.resources).expandAll(true);
@@ -188,7 +188,7 @@ $(document).ready(function() {
 	});
 	// 加载用户的角色与权限
 	if (object.ids.length === 1) {
-		$.getJson("user/"+object.ids[0], false, function(response) {
+		$.postJson("user/"+object.ids[0], null, false, function(response) {
 			if (response.status == 1) {
 				var roleIds = response.data.user.roleIds
 				if (!$.isNone(roleIds)) {

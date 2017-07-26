@@ -381,7 +381,7 @@ $(document).ready(function() {
 		$("#icon").attr("class", $(this).val());
 	});
 	// 初始化tree数据
-	$.getJson("resource/all", false, function(response) {
+	$.postJson("resource/all", null, false, function(response) {
 		if (response.status == 1) {
 			$.fn.zTree.init($("#zTree"), zSetting, response.data.resources).expandAll(true);
 		} else if (response.status == 0) {

@@ -100,7 +100,7 @@ $(document).ready(function() {
 		$.fn.zTree.getZTreeObj("zTree").expandAll(false);
 	});
 	// 初始化tree数据
-	$.getJson("resource/avaliable", false, function(response) {
+	$.postJson("resource/avaliable", null, false, function(response) {
 		if (response.status == 1) {
 			$.fn.zTree.init($("#zTree"), zSetting, response.data.resources).expandAll(true);
 		} else if (response.status == 0) {
@@ -112,7 +112,7 @@ $(document).ready(function() {
 		$.msg.error("请稍后重试或联系系统管理员解决", "系统异常");
 	});
 	// 加载它的权限
-	$.getJson("role/"+object.id, false, function(response) {
+	$.postJson("role/"+object.id, null, false, function(response) {
 		if (response.status == 1) {
 			var resourceIds = response.data.role.resourceIds;
 			if (!$.isNone(resourceIds)) {

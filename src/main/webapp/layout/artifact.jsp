@@ -98,7 +98,7 @@
 <!-- My JS -->
 <script src="assets/mrathena.js"></script>
 <script>
-$.getJson("user/resource", false, function(response) {
+$.postJson("user/resource", null, false, function(response) {
 	var navigations = response.data.resources;
 	$.each(navigations, function(index, nav) {
 		if (nav.type === "navigation") {

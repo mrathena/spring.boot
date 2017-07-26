@@ -72,7 +72,7 @@ function resetAddRoleForm() {
 }
 $(document).ready(function() {
 	// 初始化datatables数据
-	$.getJson("role/all", false, function(response) {
+	$.postJson("role/all", null, false, function(response) {
 		if (response.status == 1) {
 			$('#table').dataTable({
 				language: datatables.language,

@@ -15,7 +15,7 @@ public class DateSource {
 	@Autowired
 	private Environment env;
 	
-	@Bean(destroyMethod = "close")
+	@Bean(name = "DataSource", destroyMethod = "close")
 	public DataSource getDataSource() {
 		HikariDataSource ds = new HikariDataSource();
 		ds.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));

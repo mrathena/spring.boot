@@ -17,6 +17,7 @@ import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,22 +27,28 @@ import com.mrathena.spring.boot.shiro.SYSUserRealm;
 @Configuration
 public class Shiro {
 	
-	@Bean("cacheManager")
+	@Bean("CacheManager")
 	public EhCacheManager getCacheManager() {
 		EhCacheManager cacheManager = new EhCacheManager();
 		cacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
 		return cacheManager;
 	}
-
-	@Bean("securityManager")
-	public DefaultWebSecurityManager getSecurityManager(CacheManager cacheManager) {
-		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+	
+	@Bean("SYSUserRealm")
+	public SYSUserRealm getSYSUserRealm(@Qualifier("CacheManager") CacheManager cacheManager) {
 		SYSUserRealm realm = new SYSUserRealm();
+		realm.setCachingEnabled(false);
 		RetryLimitHashedCredentialsMatcher credentialsMatcher = new RetryLimitHashedCredentialsMatcher(cacheManager);
 		credentialsMatcher.setHashAlgorithmName("md5");
 		credentialsMatcher.setHashIterations(2);
 		credentialsMatcher.setStoredCredentialsHexEncoded(true);
 		realm.setCredentialsMatcher(credentialsMatcher);
+		return realm;
+	}
+
+	@Bean("SecurityManager")
+	public DefaultWebSecurityManager getSecurityManager(@Qualifier("SYSUserRealm") SYSUserRealm realm, @Qualifier("CacheManager") CacheManager cacheManager) {
+		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(realm);
 		securityManager.setCacheManager(cacheManager);
 		DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
@@ -54,8 +61,8 @@ public class Shiro {
 		return securityManager;
 	}
 
-	@Bean("shiro-filter")
-	public ShiroFilterFactoryBean getShiroFilter(SecurityManager securityManager) {
+	@Bean("ShiroFilter")
+	public ShiroFilterFactoryBean getShiroFilter(@Qualifier("SecurityManager") SecurityManager securityManager) {
 		ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
 		bean.setSecurityManager(securityManager);
 		bean.setLoginUrl("/login");
@@ -77,7 +84,7 @@ public class Shiro {
 		return bean;
 	}
 
-	@Bean(name = "lifecycleBeanPostProcessor")
+	@Bean("LifecycleBeanPostProcessor")
 	public LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
 		return new LifecycleBeanPostProcessor();
 	}
@@ -90,7 +97,7 @@ public class Shiro {
     }
 
     @Bean
-    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(@Qualifier("SecurityManager") SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();
         aasa.setSecurityManager(securityManager);
         return aasa;

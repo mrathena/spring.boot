@@ -10,14 +10,15 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mrathena.spring.boot.entity.SYSUser;
 import com.mrathena.spring.boot.service.SYSUserService;
-import com.mrathena.spring.boot.tool.SpringBootKit;
 
 public class SYSUserRealm extends AuthorizingRealm {
 
-	private SYSUserService userService = SpringBootKit.getBean(SYSUserService.class);
+	@Autowired
+	private SYSUserService userService;
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -80,6 +81,11 @@ public class SYSUserRealm extends AuthorizingRealm {
 	public void clearAllCache() {
 		clearAllCachedAuthenticationInfo();
 		clearAllCachedAuthorizationInfo();
+	}
+
+	@Override
+	public String toString() {
+		return "SYSUserRealm [userService=" + userService + "]";
 	}
 
 }

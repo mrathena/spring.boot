@@ -74,7 +74,7 @@ function resetAddUserForm() {
 }
 $(document).ready(function() {
 	// 初始化datatables数据
-	$.getJson("user/all", false, function(response) {
+	$.postJson("user/all", null, false, function(response) {
 		if (response.status == 1) {
 			$('#table').dataTable({
 				language: datatables.language,
