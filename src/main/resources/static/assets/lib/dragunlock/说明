@@ -1,8 +1,0 @@
-<div id="drag"></div>
-
-$("#drag").drag();
-$("#drag").drag({call:function() {
-	alert(1);
-}});
-
-元素id必须是 drag
