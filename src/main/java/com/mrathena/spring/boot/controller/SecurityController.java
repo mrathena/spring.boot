@@ -59,7 +59,7 @@ public class SecurityController {
 			AtomicInteger count = passwordRetryCache.get(user.getUsername());
 			if (count != null) {
 				if (count.get() == 5) {
-					message += "<br />由于您累计输入错误的账号与密码组合已达 5 次, 系统已锁定您的账号, 请于60分钟后再尝试登录.";
+					message += "<br />由于您累计输入错误的账号与密码组合已达 5 次, 系统已锁定您的账号, 请于60分钟后再尝试登录";
 				} else {
 					message += "<br />您还可以尝试 " + (5 - count.get()) + " 次";
 				}
@@ -68,7 +68,7 @@ public class SecurityController {
 			return "login.jsp";
 		} catch (ExcessiveAttemptsException e) {
 			// 登录失败次数过多, RetryLimitHashedCredentialsMatcher.java
-			model.addAttribute("error", "由于您累计输入错误的账号与密码组合已达 5 次, 系统已锁定您的账号, 请于60分钟后再尝试登录. <br />注意:锁定期间您的每一次登录尝试都会将锁定等待时间重置为60分钟.");
+			model.addAttribute("error", "由于您累计输入错误的账号与密码组合已达 5 次, 系统已锁定您的账号, 请于60分钟后再尝试登录 <br />注意:锁定期间您的每一次登录尝试都会将锁定等待时间重置为60分钟.");
 			return "login.jsp";
 		} catch (LockedAccountException e) {
 			// 账号已被禁用, SYSUserRealm.java
