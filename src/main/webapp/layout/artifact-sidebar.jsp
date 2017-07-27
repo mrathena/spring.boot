@@ -12,7 +12,7 @@
 				<div class="text-20" style="color: white;">Hi，[ <shiro:principal /> ]</div>
 			</li>
 			<li>
-				<a class="J_menuItem" href="welcome.jsp" data-index="0">
+				<a class="J_menuItem" href="welcome" data-index="0">
 					<i class="fa fa-home"></i>
 					<span class="nav-label">首页</span>
 					<!-- 默认主页需在对应的菜单a元素上添加data-index="0" -->

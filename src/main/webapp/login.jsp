@@ -1,4 +1,4 @@
-<script>
+<script>	
 // 判断当前窗口是否有顶级窗口, 如果有就让当前的窗口的地址栏发生变化
 if (window.top!=null && window.top.document.URL!=document.URL){
     window.top.location= document.URL; // 这样就可以让登录窗口显示在整个窗口
@@ -8,6 +8,7 @@ if (window.top!=null && window.top.document.URL!=document.URL){
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@ if (window.top!=null && window.top.document.URL!=document.URL){
 <link rel="stylesheet" href="assets/hplus/css/style.css" />
 <link rel="stylesheet" href="assets/hplus/css/login.css" />
 <link rel="stylesheet" href="assets/hplus/css/plugins/iCheck/custom.css" >
-<link rel="stylesheet" href="assets/mrathena.css" />
+<link rel="stylesheet" href="${path}${URLProvider.getForLookupPath('/assets/mrathena.css')}" />
 </head>
 <body class="signin">
 
@@ -97,7 +98,7 @@ if (window.top!=null && window.top.document.URL!=document.URL){
 	<script src="assets/lib/jquery/jquery.validate/1.16.0/localization/messages_zh.min.js"></script>
 	<script src="assets/lib/jquery/jquery.serialize/2.5.0/jquery.serialize-object.min.js"></script>
 	<script src="assets/hplus/js/plugins/iCheck/icheck.min.js"></script>
-	<script src="assets/mrathena.js"></script>
+	<script src="${path}${URLProvider.getForLookupPath('/assets/mrathena.js')}"></script>
 	<script>
 		/* $.validator.setDefaults({
 			submitHandler : function(form) {

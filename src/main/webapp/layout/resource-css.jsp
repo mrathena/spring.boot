@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
+<!-- Icon -->
+<link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- 全局CSS -->
 <link rel="stylesheet" href="assets/hplus/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/hplus/css/font-awesome.css" />
@@ -14,5 +19,5 @@
 <link rel="stylesheet" href="assets/lib/jquery/jquery.datatables/FixedHeader-3.1.2/css/fixedHeader.bootstrap.min.css" />
 <link rel="stylesheet" href="assets/lib/zTree/3.5.29/css/metroStyle/metroStyle.css" />
 <!-- 我的CSS -->
-<link rel="stylesheet" href="assets/mrathena.css" />
-<link rel="stylesheet" href="assets/custom.css" />
+<link rel="stylesheet" href="${path}${URLProvider.getForLookupPath('/assets/mrathena.css')}" />
+<link rel="stylesheet" href="${path}${URLProvider.getForLookupPath('/assets/custom.css')}" />

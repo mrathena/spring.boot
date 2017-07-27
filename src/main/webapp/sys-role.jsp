@@ -274,7 +274,7 @@ $(document).ready(function() {
 	$(document).on("click", ".authorizeCurrentRole", function() {
 		var id = $(this).data("id");
 		var rolename = $(this).data("rolename");
-		var url = $.getUrlWithObject("sys-role-authorize.jsp", {id:id, rolename:rolename});
+		var url = $.getUrlWithObject("sys-role-authorize", {id:id, rolename:rolename});
 		var index = layer.open({
 			type: 2,
 			title: "角色授权",

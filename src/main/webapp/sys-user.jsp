@@ -346,7 +346,7 @@ $(document).ready(function() {
 		if (ids.length > 1) {
 			$.msg.warning("多用户授权时不展示其原有的角色与资源权限");
 		}
-		var url = $.getUrlWithObject("sys-user-authorize.jsp", {ids:ids, usernames:usernames});
+		var url = $.getUrlWithObject("sys-user-authorize", {ids:ids, usernames:usernames});
 		var index = layer.open({
 			type: 2,
 			title: "用户授权",
