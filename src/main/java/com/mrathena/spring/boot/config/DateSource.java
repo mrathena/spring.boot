@@ -14,7 +14,7 @@ public class DateSource {
 
 	@Autowired
 	private Environment env;
-	
+
 	@Bean(name = "DataSource", destroyMethod = "close")
 	public DataSource getDataSource() {
 		HikariDataSource ds = new HikariDataSource();
@@ -24,5 +24,5 @@ public class DateSource {
 		ds.setPassword(env.getProperty("spring.datasource.password"));
 		return ds;
 	}
-	
+
 }
